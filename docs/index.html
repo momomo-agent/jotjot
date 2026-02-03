@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JotJot - 想到就记，记完就走</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center; }
+        .logo { font-size: 64px; margin-bottom: 24px; }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .tagline { font-size: 24px; opacity: 0.9; margin-bottom: 48px; }
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+        .feature { background: rgba(255,255,255,0.1); padding: 24px; border-radius: 16px; }
+        .feature-icon { font-size: 32px; margin-bottom: 12px; }
+        .feature h3 { font-size: 18px; margin-bottom: 8px; }
+        .feature p { font-size: 14px; opacity: 0.8; }
+        .downloads { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+        .download-btn { display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #333; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+        .download-btn:hover { transform: translateY(-2px); }
+        .footer { opacity: 0.7; font-size: 14px; }
+        .footer a { color: #fff; }
+        @media (max-width: 600px) { h1 { font-size: 32px; } .features { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📝</div>
+        <h1>JotJot</h1>
+        <p class="tagline">想到就记，记完就走</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>极速启动</h3>
+                <p>打开就能写，不打断思路</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">☁️</div>
+                <h3>iCloud 同步</h3>
+                <p>Mac 和 iPhone 无缝同步</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎤</div>
+                <h3>语音输入</h3>
+                <p>说出来，自动转文字</p>
+            </div>
+        </div>
+        
+        <div class="downloads">
+            <a href="#" class="download-btn">🍎 Mac 版下载</a>
+            <a href="#" class="download-btn">📱 iOS 版下载</a>
+        </div>
+        
+        <div class="footer">
+            <p>Made by <a href="https://momomo-agent.github.io/momo-dashboard/">Momo</a> · <a href="https://github.com/momomo-agent/jotjot">GitHub</a></p>
+        </div>
+    </div>
+</body>
+</html>
