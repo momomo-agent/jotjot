@@ -1,0 +1,78 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "0f70f5075205ba22bba266bed0683b9890a4dc071cbdabce3adc2005911b092d"
+    }
+  ],
+  "containerPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/JotJotiOS.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "install",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator26.0",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Products",
+      "derivedDataPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build",
+      "indexDataStoreFolderPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "install",
+          "ASSET_PACK_FOLDER_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/InstallationBuildProductsLocation/OnDemandResources",
+          "ASSETCATALOG_COMPILER_FLATTENED_APP_ICON_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/ProductIcon.png",
+          "DEPLOYMENT_LOCATION" : "YES",
+          "DEPLOYMENT_POSTPROCESSING" : "YES",
+          "DSTROOT" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/InstallationBuildProductsLocation",
+          "EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE" : "NO",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_SIGNATURE_AGGREGATION" : "YES",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "INDEX_ENABLE_DATA_STORE" : "NO",
+          "MESSAGES_APPLICATION_EXTENSION_SUPPORT_FOLDER_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/MessagesApplicationExtensionSupport",
+          "MESSAGES_APPLICATION_SUPPORT_FOLDER_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/MessagesApplicationSupport",
+          "OBJROOT" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "SHARED_PRECOMPS_DIR" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/PrecompiledHeaders",
+          "SIGNATURE_METADATA_FOLDER_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/Signatures",
+          "SWIFT_STDLIB_TOOL_UNSIGNED_DESTINATION_DIR" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/SwiftSupport",
+          "SYMROOT" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath",
+          "WATCHKIT_2_SUPPORT_FOLDER_PATH" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/BuildProductsPath/WatchKitSupport2"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "archive",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

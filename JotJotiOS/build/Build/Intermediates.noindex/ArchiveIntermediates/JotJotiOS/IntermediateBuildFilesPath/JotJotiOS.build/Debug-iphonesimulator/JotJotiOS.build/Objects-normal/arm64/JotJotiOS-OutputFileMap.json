@@ -1,0 +1,69 @@
+{
+  "" : {
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOS-master.dia",
+    "emit-module-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOS-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOS-master-emit-module.dia",
+    "pch" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOS-master-Bridging-header.pch",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOS-master.swiftdeps"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotKit/Sources/Jot.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/Jot~partial.swiftmodule"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/Sources/ContentView.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/Sources/JotCardView.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotCardView~partial.swiftmodule"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/Sources/JotJotiOSApp.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotJotiOSApp~partial.swiftmodule"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/Sources/JotListRow.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListRow~partial.swiftmodule"
+  },
+  "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/Sources/JotListSheet.swift" : {
+    "const-values" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.swiftconstvalues",
+    "dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.d",
+    "diagnostics" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.dia",
+    "index-unit-output-path" : "/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.o",
+    "llvm-bc" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.bc",
+    "object" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.o",
+    "swift-dependencies" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet.swiftdeps",
+    "swiftmodule" : "/Users/kenefe/LOCAL/momo-agent/JotJot/JotJotiOS/build/Build/Intermediates.noindex/ArchiveIntermediates/JotJotiOS/IntermediateBuildFilesPath/JotJotiOS.build/Debug-iphonesimulator/JotJotiOS.build/Objects-normal/arm64/JotListSheet~partial.swiftmodule"
+  }
+}

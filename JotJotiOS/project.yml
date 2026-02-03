@@ -1,0 +1,24 @@
+name: JotJotiOS
+options:
+  bundleIdPrefix: com.kenefe
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+
+targets:
+  JotJotiOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: ../JotJotKit/Sources
+    settings:
+      base:
+        PRODUCT_NAME: JotJot
+        PRODUCT_BUNDLE_IDENTIFIER: com.kenefe.jotjot
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.9"
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "JotJot 需要麦克风权限来录制语音并转换为文字"
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权限来将您的语音转换为文字"
