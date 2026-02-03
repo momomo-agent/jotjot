@@ -3,40 +3,73 @@ import SwiftUI
 struct JotCardView: View {
     @Bindable var jot: Jot
     var keyboardHeight: CGFloat = 0
+    var onDelete: (() -> Void)? = nil
     
     @FocusState private var isFocused: Bool
     @State private var showCopied = false
+    @State private var showDeleteConfirm = false
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         VStack(spacing: 0) {
-            cardHeader
-            Divider()
-                .opacity(0.5)
+            // 顶部时间戳
+            HStack {
+                Text(jot.updatedAt, format: .dateTime.month().day().hour().minute())
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+                Spacer()
+                if jot.isPinned {
+                    Image(systemName: "pin.fill")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 16)
+            .padding(.bottom, 8)
+            
             cardEditor
+            
+            Divider()
+                .opacity(0.3)
+            cardFooter
         }
         .background(cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-        .shadow(color: .black.opacity(0.03), radius: 1, y: 1)
-        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
-        .shadow(color: .black.opacity(0.08), radius: 24, y: 12)
-        .padding(.horizontal, 12)
-        .padding(.top, 8)
-        .padding(.bottom, keyboardHeight > 0 ? 4 : 12)
+        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 2, y: 2)
+        .shadow(color: .black.opacity(0.06), radius: 12, y: 6)
+        .shadow(color: .black.opacity(0.1), radius: 32, y: 16)
+        .padding(.horizontal, 16)
+        .padding(.top, 12)
+        .padding(.bottom, keyboardHeight > 0 ? 8 : 16)
         .onAppear {
             impactFeedback.prepare()
         }
     }
     
     private var cardBackground: some View {
-        RoundedRectangle(cornerRadius: 28, style: .continuous)
+        RoundedRectangle(cornerRadius: 32, style: .continuous)
             .fill(.background)
             .overlay(
-                RoundedRectangle(cornerRadius: 28, style: .continuous)
-                    .stroke(Color.primary.opacity(0.06), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 32, style: .continuous)
+                    .stroke(Color.primary.opacity(0.04), lineWidth: 0.5)
             )
+    }
+    
+    private var cardFooter: some View {
+        HStack {
+            pinButton
+            Spacer()
+            micButton
+            Spacer()
+            deleteButton
+            Spacer()
+            copyButton
+        }
+        .padding(.horizontal, 32)
+        .padding(.vertical, 14)
     }
     
     private var cardHeader: some View {
@@ -88,13 +121,31 @@ struct JotCardView: View {
         .buttonStyle(ScaleButtonStyle())
     }
     
+    private var deleteButton: some View {
+        Button(action: { showDeleteConfirm = true }) {
+            Image(systemName: "trash")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(.secondary)
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .confirmationDialog("删除这条笔记？", isPresented: $showDeleteConfirm) {
+            Button("删除", role: .destructive) {
+                impactFeedback.impactOccurred(intensity: 0.6)
+                onDelete?()
+            }
+            Button("取消", role: .cancel) {}
+        }
+    }
+    
     private var cardEditor: some View {
         TextEditor(text: $jot.content)
             .focused($isFocused)
             .scrollContentBackground(.hidden)
-            .font(.system(size: 17, weight: .regular, design: .rounded))
-            .padding(.horizontal, 18)
-            .padding(.vertical, 14)
+            .font(.system(size: 18, weight: .regular, design: .default))
+            .lineSpacing(4)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 12)
             .onChange(of: jot.content) {
                 jot.updatedAt = Date()
             }

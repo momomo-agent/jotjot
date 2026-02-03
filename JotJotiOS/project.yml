@@ -12,6 +12,13 @@ targets:
     sources:
       - path: Sources
       - path: ../JotJotKit/Sources
+    entitlements:
+      path: Resources/JotJot.entitlements
+      properties:
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.kenefe.jotjot
     settings:
       base:
         PRODUCT_NAME: JotJot
@@ -20,5 +27,8 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: YES
         SWIFT_VERSION: "5.9"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleDefault
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
         INFOPLIST_KEY_NSMicrophoneUsageDescription: "JotJot 需要麦克风权限来录制语音并转换为文字"
         INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权限来将您的语音转换为文字"

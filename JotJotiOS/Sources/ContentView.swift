@@ -15,23 +15,18 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geo in
-                ZStack {
-                    // 渐变背景
-                    LinearGradient(
-                        colors: [
-                            Color(.systemGroupedBackground),
-                            Color(.systemGroupedBackground).opacity(0.95)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                    .ignoresSafeArea()
-                    
-                    if jots.isEmpty {
-                        emptyState
-                    } else {
-                        cardStack(in: geo)
+            ZStack {
+                // 渐变背景 - 放在最外层确保覆盖全屏
+                Color(.systemGroupedBackground)
+                    .ignoresSafeArea(.all)
+                
+                GeometryReader { geo in
+                    ZStack {
+                        if jots.isEmpty {
+                            emptyState
+                        } else {
+                            cardStack(in: geo)
+                        }
                     }
                 }
             }
@@ -101,7 +96,9 @@ struct ContentView: View {
                 let offset = index - currentIndex
                 let dragProgress = dragOffset / screenWidth
                 
-                JotCardView(jot: jots[index], keyboardHeight: keyboardHeight)
+                JotCardView(jot: jots[index], keyboardHeight: keyboardHeight, onDelete: {
+                    deleteJot(at: index)
+                })
                     .zIndex(Double(-abs(offset)))
                     .offset(x: cardXOffset(for: offset, dragProgress: dragProgress, screenWidth: screenWidth))
                     .scaleEffect(cardScale(for: offset, dragProgress: dragProgress))
@@ -263,6 +260,18 @@ struct ContentView: View {
             let jot = Jot(content: "")
             modelContext.insert(jot)
             currentIndex = 0
+        }
+    }
+    
+    private func deleteJot(at index: Int) {
+        guard index < jots.count else { return }
+        let jot = jots[index]
+        
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            modelContext.delete(jot)
+            if currentIndex >= jots.count - 1 {
+                currentIndex = max(0, jots.count - 2)
+            }
         }
     }
     
