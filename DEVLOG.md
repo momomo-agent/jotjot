@@ -296,3 +296,16 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 - ✅ App 图标（双端）
 - ✅ 品牌色（双端）
 - ✅ iCloud 配置统一
+- ✅ 列表行动画效果
+
+### 双端功能对照（最新）
+| 功能 | iOS | Mac |
+|------|-----|-----|
+| Markdown 渲染 | ✅ | ✅ |
+| 链接预览 | ✅ | ✅ |
+| AI 合并推荐 | ✅ | ✅ |
+| 搜索 | ✅ | ✅ |
+| 分享 | ✅ | ✅ |
+| 字数统计 | ✅ | ✅ |
+| App 图标 | ✅ | ✅ |
+| 品牌色 | ✅ | ✅ |
