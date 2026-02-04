@@ -19,7 +19,6 @@ struct JotCardView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            mediaGrid
             cardEditor
             cardFooter
         }
@@ -28,11 +27,9 @@ struct JotCardView: View {
         .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
         .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
         .shadow(color: .black.opacity(0.08), radius: 24, y: 12)
-        .overlay(dropOverlay)
         .padding(.horizontal, 20)
         .padding(.top, 16)
         .padding(.bottom, keyboardHeight > 0 ? 8 : 20)
-        .onDrop(of: [.image, .movie], isTargeted: $isDropTargeted, perform: handleDrop)
         .onAppear { impactFeedback.prepare() }
     }
     
@@ -189,20 +186,12 @@ struct JotCardView: View {
     
     // MARK: - 编辑器
     private var cardEditor: some View {
-        TextEditor(text: $jot.content)
-            .focused($isFocused)
-            .scrollContentBackground(.hidden)
-            .font(.system(size: 17))
-            .lineSpacing(12)
-            .padding(.horizontal, 24)
-            .padding(.top, jot.mediaItems.isEmpty ? 28 : 12)
-            .padding(.bottom, 20)
-            .onChange(of: jot.content) { jot.updatedAt = Date() }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    isFocused = true
-                }
-            }
+        MarkdownTextEditor(
+            text: $jot.content,
+            mediaItems: jot.mediaItems
+        )
+        .frame(minHeight: 200)
+        .onChange(of: jot.content) { jot.updatedAt = Date() }
     }
     
     // MARK: - 操作
@@ -230,20 +219,20 @@ struct JotCardView: View {
     private func loadSelectedPhotos(_ items: [PhotosPickerItem]) async {
         for item in items {
             if let data = try? await item.loadTransferable(type: Data.self) {
-                let type: MediaType = item.supportedContentTypes.contains(.movie) ? .video : .image
-                var thumbnail: Data? = nil
+                // 只支持图片的图文混排
+                guard !item.supportedContentTypes.contains(.movie) else { continue }
                 
-                if type == .video {
-                    thumbnail = await generateVideoThumbnail(data)
-                }
-                
-                let mediaItem = MediaItem(type: type, data: data, thumbnail: thumbnail)
+                let mediaItem = MediaItem(type: .image, data: data, thumbnail: nil)
                 
                 await MainActor.run {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                        jot.mediaItems.append(mediaItem)
-                        jot.updatedAt = Date()
-                    }
+                    // 添加到媒体列表
+                    jot.mediaItems.append(mediaItem)
+                    
+                    // 在文本末尾插入图片标记
+                    let imageTag = "\n![](\\(mediaItem.id.uuidString))\n"
+                    jot.content += imageTag
+                    jot.updatedAt = Date()
+                    
                     impactFeedback.impactOccurred(intensity: 0.4)
                 }
             }
