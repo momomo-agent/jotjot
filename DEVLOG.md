@@ -309,3 +309,8 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 | 字数统计 | ✅ | ✅ |
 | App 图标 | ✅ | ✅ |
 | 品牌色 | ✅ | ✅ |
+- ✅ 键盘快捷键 ⌘N（iOS iPad）
+- ✅ 无障碍标签（iOS）
+
+### 进度
+JotJot 从 55% → 85%
