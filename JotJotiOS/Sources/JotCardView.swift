@@ -121,9 +121,13 @@ struct JotCardView: View {
     // MARK: - 底部工具栏
     private var cardFooter: some View {
         HStack(spacing: 0) {
-            Text(jot.updatedAt, format: .dateTime.month().day().hour().minute())
-                .font(.system(size: 11, weight: .medium, design: .rounded))
-                .foregroundStyle(.tertiary)
+            HStack(spacing: 8) {
+                Text(jot.updatedAt, format: .dateTime.month().day().hour().minute())
+                Text("·")
+                Text("\(jot.content.count) 字")
+            }
+            .font(.system(size: 11, weight: .medium, design: .rounded))
+            .foregroundStyle(.tertiary)
             
             Spacer()
             
