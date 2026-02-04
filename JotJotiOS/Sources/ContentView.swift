@@ -4,10 +4,11 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Jot.updatedAt, order: .reverse) private var jots: [Jot]
-    @State private var currentJotId: UUID? = nil  // 改用 ID 追踪
+    @State private var currentJotId: UUID? = nil
     @State private var dragOffset: CGFloat = 0
     @State private var showList = false
     @State private var keyboardHeight: CGFloat = 0
+    @State private var mergeSuggestion: JotSimilarityAnalyzer.SimilarPair? = nil
     
     // 触觉反馈生成器
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
@@ -50,12 +51,31 @@ struct ContentView: View {
                 // 顶部工具栏（最上面）
                 topBar
                     .zIndex(2)
+                
+                // 合并推荐（底部浮层）
+                if let suggestion = mergeSuggestion {
+                    VStack {
+                        Spacer()
+                        MergeSuggestionCard(
+                            pair: suggestion,
+                            onMerge: { mergeJots(suggestion) },
+                            onDismiss: { mergeSuggestion = nil }
+                        )
+                        .padding()
+                    }
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(3)
+                }
             }
         }
         .onAppear {
             setupKeyboardObservers()
             impactFeedback.prepare()
             selectionFeedback.prepare()
+            checkForSimilarJots()
+        }
+        .onChange(of: jots.count) { _, _ in
+            checkForSimilarJots()
         }
     }
     
@@ -456,5 +476,38 @@ struct ContentView: View {
                 keyboardHeight = 0
             }
         }
+    }
+    
+    // MARK: - 合并推荐
+    
+    private func checkForSimilarJots() {
+        guard jots.count >= 2 else { return }
+        
+        let pairs = JotSimilarityAnalyzer.findSimilarPairs(in: jots, threshold: 0.35)
+        
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            mergeSuggestion = pairs.first
+        }
+    }
+    
+    private func mergeJots(_ pair: JotSimilarityAnalyzer.SimilarPair) {
+        let merged = "\(pair.jot1.content)\n\n---\n\n\(pair.jot2.content)"
+        pair.jot1.content = merged
+        pair.jot1.updatedAt = Date()
+        
+        // 合并媒体
+        pair.jot1.mediaItems.append(contentsOf: pair.jot2.mediaItems)
+        
+        // 删除第二个笔记
+        modelContext.delete(pair.jot2)
+        
+        // 跳转到合并后的笔记
+        currentJotId = pair.jot1.id
+        
+        withAnimation {
+            mergeSuggestion = nil
+        }
+        
+        impactFeedback.impactOccurred(intensity: 0.6)
     }
 }
