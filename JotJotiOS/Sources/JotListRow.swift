@@ -8,8 +8,9 @@ struct JotListRow: View {
         HStack(spacing: 14) {
             // 选中指示器
             Circle()
-                .fill(isSelected ? Color.blue : Color.clear)
+                .fill(isSelected ? Color.accentColor : Color.clear)
                 .frame(width: 8, height: 8)
+                .animation(.spring(response: 0.3), value: isSelected)
             
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 6) {
@@ -17,6 +18,7 @@ struct JotListRow: View {
                         Image(systemName: "pin.fill")
                             .font(.system(size: 10))
                             .foregroundStyle(.orange)
+                            .transition(.scale.combined(with: .opacity))
                     }
                     
                     Text(title)
@@ -41,7 +43,8 @@ struct JotListRow: View {
         .padding(.horizontal, 12)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(isSelected ? Color.blue.opacity(0.08) : Color.clear)
+                .fill(isSelected ? Color.accentColor.opacity(0.08) : Color.clear)
+                .animation(.easeInOut(duration: 0.2), value: isSelected)
         )
         .contentShape(Rectangle())
     }
