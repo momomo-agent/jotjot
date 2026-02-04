@@ -14,11 +14,6 @@ targets:
       - path: ../JotJotKit/Sources
     entitlements:
       path: Resources/JotJot.entitlements
-      properties:
-        com.apple.developer.icloud-services:
-          - CloudKit
-        com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.kenefe.jotjot
     settings:
       base:
         PRODUCT_NAME: JotJot
@@ -27,6 +22,8 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: YES
         SWIFT_VERSION: "5.9"
+        DEVELOPMENT_TEAM: P2GN9QW8E5
+        CODE_SIGN_STYLE: Automatic
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleDefault
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"

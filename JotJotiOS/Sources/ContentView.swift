@@ -14,42 +14,34 @@ struct ContentView: View {
     private let selectionFeedback = UISelectionFeedbackGenerator()
     
     var body: some View {
-        NavigationStack {
+        GeometryReader { geo in
             ZStack {
-                // 渐变背景 - 放在最外层确保覆盖全屏
+                // 背景
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea(.all)
                 
-                GeometryReader { geo in
-                    ZStack {
-                        if jots.isEmpty {
-                            emptyState
-                        } else {
-                            cardStack(in: geo)
-                        }
+                // 背后的列表（始终存在，showList 时显示）
+                if !jots.isEmpty {
+                    listView(in: geo)
+                        .opacity(showList ? 1 : 0)
+                }
+                
+                // 前景的卡片
+                ZStack {
+                    if jots.isEmpty {
+                        emptyState
+                    } else {
+                        cardStack(in: geo)
                     }
                 }
-            }
-            .safeAreaInset(edge: .bottom) {
-                bottomBar
-                    .padding(.bottom, keyboardHeight > 0 ? 0 : 0)
-            }
-            .navigationTitle("JotJot")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { showList = true }) {
-                        Image(systemName: "list.bullet")
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: createNewJot) {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $showList) {
-                JotListSheet(jots: jots, currentIndex: $currentIndex)
+                .scaleEffect(showList ? 0.85 : 1)
+                .offset(y: showList ? -geo.size.height * 0.35 : 0)
+                .opacity(showList ? 0.6 : 1)
+                .animation(.spring(response: 0.4, dampingFraction: 0.85), value: showList)
+                .allowsHitTesting(!showList)
+                
+                // 顶部工具栏
+                topBar
             }
         }
         .onAppear {
@@ -59,46 +51,98 @@ struct ContentView: View {
         }
     }
     
-    private var emptyState: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "note.text")
-                .font(.system(size: 72, weight: .thin))
-                .foregroundStyle(.tertiary)
-                .symbolEffect(.pulse.byLayer, options: .repeating)
+    // MARK: - 顶部工具栏
+    private var topBar: some View {
+        VStack {
+            HStack {
+                Button(action: toggleList) {
+                    Image(systemName: showList ? "xmark" : "list.bullet")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.primary)
+                        .frame(width: 44, height: 44)
+                }
+                .disabled(jots.isEmpty)
+                
+                Spacer()
+                
+                Text("JotJot")
+                    .font(.system(size: 17, weight: .semibold))
+                
+                Spacer()
+                
+                Button(action: createNewJot) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.primary)
+                        .frame(width: 44, height: 44)
+                }
+            }
+            .padding(.horizontal, 8)
             
-            VStack(spacing: 8) {
+            Spacer()
+        }
+    }
+    
+    private func toggleList() {
+        impactFeedback.impactOccurred(intensity: 0.5)
+        // 收起键盘
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+            showList.toggle()
+        }
+    }
+    
+    private var emptyState: some View {
+        VStack(spacing: 28) {
+            Image(systemName: "note.text")
+                .font(.system(size: 64, weight: .thin))
+                .foregroundStyle(.tertiary)
+            
+            VStack(spacing: 10) {
                 Text("开始记录")
-                    .font(.title2.weight(.medium))
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
                 Text("想到就记，记完就走")
-                    .font(.subheadline)
+                    .font(.system(size: 15))
                     .foregroundStyle(.secondary)
             }
             
             Button(action: createNewJot) {
                 Label("新建笔记", systemImage: "plus.circle.fill")
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(.blue, in: Capsule())
+                    .padding(.horizontal, 28)
+                    .padding(.vertical, 14)
+                    .background(Color.blue, in: Capsule())
             }
             .buttonStyle(ScaleButtonStyle())
-            .padding(.top, 8)
+            .padding(.top, 4)
         }
     }
     
     @ViewBuilder
     private func cardStack(in geo: GeometryProxy) -> some View {
         let screenWidth = geo.size.width
+        // 安全获取当前索引
+        let safeCurrentIndex = min(max(0, currentIndex), max(0, jots.count - 1))
         
         ZStack {
-            ForEach(visibleIndices, id: \.self) { index in
-                let offset = index - currentIndex
-                let dragProgress = dragOffset / screenWidth
-                
-                JotCardView(jot: jots[index], keyboardHeight: keyboardHeight, onDelete: {
-                    deleteJot(at: index)
-                })
+            // 点击背景收起键盘
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+            
+            // 使用 jot.id 作为标识，避免索引越界
+            ForEach(Array(jots.enumerated()), id: \.element.id) { index, jot in
+                // 只显示当前卡片附近的几张
+                if abs(index - safeCurrentIndex) <= 2 {
+                    let offset = index - safeCurrentIndex
+                    let dragProgress = dragOffset / screenWidth
+                    
+                    JotCardView(jot: jot, keyboardHeight: keyboardHeight, onDelete: {
+                        deleteJot(jot: jot)
+                    })
                     .zIndex(Double(-abs(offset)))
                     .offset(x: cardXOffset(for: offset, dragProgress: dragProgress, screenWidth: screenWidth))
                     .scaleEffect(cardScale(for: offset, dragProgress: dragProgress))
@@ -109,14 +153,18 @@ struct ContentView: View {
                         axis: (x: 0, y: 1, z: 0),
                         perspective: 0.5
                     )
+                }
             }
         }
-        .gesture(swipeGesture)
-    }
-    
-    private var visibleIndices: [Int] {
-        let range = max(0, currentIndex - 2)...min(jots.count - 1, currentIndex + 2)
-        return Array(range)
+        .gesture(jots.isEmpty ? nil : swipeGesture)
+        .onChange(of: jots.count) { oldCount, newCount in
+            // 当笔记数量变化时，确保 currentIndex 有效
+            if newCount == 0 {
+                currentIndex = 0
+            } else if currentIndex >= newCount {
+                currentIndex = newCount - 1
+            }
+        }
     }
     
     // MARK: - 卡片动效计算
@@ -192,17 +240,25 @@ struct ContentView: View {
     }
     
     private func handleSwipeEnd(_ value: DragGesture.Value) {
+        // 空数组保护
+        guard !jots.isEmpty else {
+            dragOffset = 0
+            return
+        }
+        
         let threshold: CGFloat = 60
         let velocity = value.predictedEndTranslation.width - value.translation.width
         
+        // 确保 currentIndex 在有效范围内
+        let safeCurrentIndex = min(max(0, currentIndex), jots.count - 1)
         var didSwitch = false
-        var newIndex = currentIndex
+        var newIndex = safeCurrentIndex
         
-        if (value.translation.width > threshold || velocity > 150) && currentIndex > 0 {
-            newIndex = currentIndex - 1
+        if (value.translation.width > threshold || velocity > 150) && safeCurrentIndex > 0 {
+            newIndex = safeCurrentIndex - 1
             didSwitch = true
-        } else if (value.translation.width < -threshold || velocity < -150) && currentIndex < jots.count - 1 {
-            newIndex = currentIndex + 1
+        } else if (value.translation.width < -threshold || velocity < -150) && safeCurrentIndex < jots.count - 1 {
+            newIndex = safeCurrentIndex + 1
             didSwitch = true
         }
         
@@ -210,7 +266,6 @@ struct ContentView: View {
         if didSwitch {
             impactFeedback.impactOccurred(intensity: 0.6)
         } else if abs(value.translation.width) > 20 {
-            // 没切换但有明显拖动，给个轻微反馈
             selectionFeedback.selectionChanged()
         }
         
@@ -219,6 +274,79 @@ struct ContentView: View {
             currentIndex = newIndex
             dragOffset = 0
         }
+    }
+    
+    // MARK: - 背后的列表视图
+    
+    private func listView(in geo: GeometryProxy) -> some View {
+        VStack(spacing: 0) {
+            Spacer()
+                .frame(height: 60)
+            
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        ForEach(Array(jots.enumerated()), id: \.element.id) { index, jot in
+                            listRow(jot: jot, index: index, isSelected: index == currentIndex)
+                                .id(index)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    .padding(.bottom, 120)
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation {
+                            proxy.scrollTo(currentIndex, anchor: .center)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func listRow(jot: Jot, index: Int, isSelected: Bool) -> some View {
+        Button {
+            impactFeedback.impactOccurred(intensity: 0.5)
+            currentIndex = index
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                showList = false
+            }
+        } label: {
+            HStack(spacing: 14) {
+                Circle()
+                    .fill(isSelected ? Color.blue : Color.clear)
+                    .frame(width: 8, height: 8)
+                
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 6) {
+                        if jot.isPinned {
+                            Image(systemName: "pin.fill")
+                                .font(.system(size: 10))
+                                .foregroundStyle(.orange)
+                        }
+                        Text(jot.content.components(separatedBy: .newlines).first ?? "新笔记")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(.primary)
+                            .lineLimit(1)
+                    }
+                    
+                    Text(jot.updatedAt, style: .relative)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(.tertiary)
+                }
+                
+                Spacer()
+            }
+            .padding(.vertical, 14)
+            .padding(.horizontal, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(isSelected ? Color.blue.opacity(0.1) : Color(.secondarySystemGroupedBackground))
+            )
+        }
+        .buttonStyle(.plain)
     }
     
     // MARK: - 底部栏
@@ -230,22 +358,23 @@ struct ContentView: View {
             }
             Spacer()
         }
-        .padding(.horizontal)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 14)
         .background(.ultraThinMaterial)
     }
     
     private var pageIndicator: some View {
-        HStack(spacing: 6) {
+        let safeIndex = min(currentIndex, max(0, jots.count - 1))
+        return HStack(spacing: 6) {
             ForEach(0..<min(jots.count, 5), id: \.self) { i in
                 Circle()
-                    .fill(i == currentIndex ? Color.primary : Color.secondary.opacity(0.3))
-                    .frame(width: i == currentIndex ? 8 : 6, height: i == currentIndex ? 8 : 6)
-                    .animation(.spring(response: 0.3), value: currentIndex)
+                    .fill(i == safeIndex ? Color.primary : Color.secondary.opacity(0.3))
+                    .frame(width: i == safeIndex ? 8 : 6, height: i == safeIndex ? 8 : 6)
+                    .animation(.spring(response: 0.3), value: safeIndex)
             }
             if jots.count > 5 {
                 Text("+\(jots.count - 5)")
-                    .font(.caption2)
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
                     .foregroundStyle(.secondary)
             }
         }
@@ -263,15 +392,30 @@ struct ContentView: View {
         }
     }
     
-    private func deleteJot(at index: Int) {
-        guard index < jots.count else { return }
-        let jot = jots[index]
+    private func deleteJot(jot: Jot) {
+        // 找到当前 jot 的索引
+        guard let index = jots.firstIndex(where: { $0.id == jot.id }) else { return }
+        
+        // 计算删除后的新索引
+        let newCount = jots.count - 1
+        let newIndex: Int
+        if newCount == 0 {
+            newIndex = 0
+        } else if currentIndex >= newCount {
+            newIndex = newCount - 1
+        } else if index < currentIndex {
+            newIndex = currentIndex - 1
+        } else {
+            newIndex = currentIndex
+        }
+        
+        // 触感反馈
+        let feedback = UINotificationFeedbackGenerator()
+        feedback.notificationOccurred(.success)
         
         withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            currentIndex = newIndex
             modelContext.delete(jot)
-            if currentIndex >= jots.count - 1 {
-                currentIndex = max(0, jots.count - 2)
-            }
         }
     }
     

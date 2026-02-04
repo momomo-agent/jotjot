@@ -1,4 +1,7 @@
 import SwiftUI
+import PhotosUI
+import UniformTypeIdentifiers
+import AVFoundation
 
 struct JotCardView: View {
     @Bindable var jot: Jot
@@ -8,115 +11,160 @@ struct JotCardView: View {
     @FocusState private var isFocused: Bool
     @State private var showCopied = false
     @State private var showDeleteConfirm = false
+    @State private var selectedPhotos: [PhotosPickerItem] = []
+    @State private var isDropTargeted = false
     @StateObject private var speechRecognizer = SpeechRecognizer()
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         VStack(spacing: 0) {
-            // 顶部时间戳
-            HStack {
-                Text(jot.updatedAt, format: .dateTime.month().day().hour().minute())
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
-                Spacer()
-                if jot.isPinned {
-                    Image(systemName: "pin.fill")
-                        .font(.caption)
-                        .foregroundStyle(.orange)
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 16)
-            .padding(.bottom, 8)
-            
+            mediaGrid
             cardEditor
-            
-            Divider()
-                .opacity(0.3)
             cardFooter
         }
         .background(cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-        .shadow(color: .black.opacity(0.04), radius: 2, y: 2)
-        .shadow(color: .black.opacity(0.06), radius: 12, y: 6)
-        .shadow(color: .black.opacity(0.1), radius: 32, y: 16)
-        .padding(.horizontal, 16)
-        .padding(.top, 12)
-        .padding(.bottom, keyboardHeight > 0 ? 8 : 16)
-        .onAppear {
-            impactFeedback.prepare()
-        }
-    }
-    
-    private var cardBackground: some View {
-        RoundedRectangle(cornerRadius: 32, style: .continuous)
-            .fill(.background)
-            .overlay(
-                RoundedRectangle(cornerRadius: 32, style: .continuous)
-                    .stroke(Color.primary.opacity(0.04), lineWidth: 0.5)
-            )
-    }
-    
-    private var cardFooter: some View {
-        HStack {
-            pinButton
-            Spacer()
-            micButton
-            Spacer()
-            deleteButton
-            Spacer()
-            copyButton
-        }
-        .padding(.horizontal, 32)
-        .padding(.vertical, 14)
-    }
-    
-    private var cardHeader: some View {
-        HStack(spacing: 16) {
-            pinButton
-            Spacer()
-            timestampLabel
-            micButton
-            copyButton
-        }
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
+        .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+        .shadow(color: .black.opacity(0.08), radius: 24, y: 12)
+        .overlay(dropOverlay)
         .padding(.horizontal, 20)
-        .padding(.vertical, 14)
+        .padding(.top, 16)
+        .padding(.bottom, keyboardHeight > 0 ? 8 : 20)
+        .onDrop(of: [.image, .movie], isTargeted: $isDropTargeted, perform: handleDrop)
+        .onAppear { impactFeedback.prepare() }
     }
     
-    private var micButton: some View {
-        Button(action: toggleVoiceInput) {
-            Image(systemName: speechRecognizer.isRecording ? "mic.fill" : "mic")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(speechRecognizer.isRecording ? .red : .secondary)
-                .symbolEffect(.pulse.byLayer, options: .repeating, isActive: speechRecognizer.isRecording)
-                .contentTransition(.symbolEffect(.replace))
+    // MARK: - 媒体网格
+    @ViewBuilder
+    private var mediaGrid: some View {
+        if !jot.mediaItems.isEmpty {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(jot.mediaItems) { item in
+                        mediaItemView(item)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                .padding(.bottom, 8)
+            }
         }
-        .buttonStyle(ScaleButtonStyle())
     }
     
-    private var timestampLabel: some View {
-        Text(jot.updatedAt, style: .relative)
-            .font(.caption)
-            .foregroundStyle(.tertiary)
+    private func mediaItemView(_ item: MediaItem) -> some View {
+        Group {
+            if item.type == .image, let uiImage = UIImage(data: item.data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else if item.type == .video, let thumb = item.thumbnail, let uiImage = UIImage(data: thumb) {
+                ZStack {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                    Image(systemName: "play.circle.fill")
+                        .font(.system(size: 32))
+                        .foregroundStyle(.white.opacity(0.9))
+                }
+            }
+        }
+        .frame(width: 80, height: 80)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 12))
+        .contextMenu {
+            Button(role: .destructive) {
+                removeMedia(item)
+            } label: {
+                Label("删除", systemImage: "trash")
+            }
+        }
+        .draggable(item.data)
     }
     
+    // MARK: - 拖放覆盖层
+    private var dropOverlay: some View {
+        RoundedRectangle(cornerRadius: 28, style: .continuous)
+            .stroke(Color.accentColor, lineWidth: 3)
+            .background(
+                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    .fill(Color.accentColor.opacity(0.1))
+            )
+            .opacity(isDropTargeted ? 1 : 0)
+            .animation(.easeInOut(duration: 0.2), value: isDropTargeted)
+    }
+    
+    // MARK: - 背景
+    private var cardBackground: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(.background)
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .stroke(
+                    LinearGradient(
+                        colors: [.white.opacity(0.5), .white.opacity(0.1), .clear],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    ),
+                    lineWidth: 0.5
+                )
+        }
+    }
+    
+    // MARK: - 底部工具栏
+    private var cardFooter: some View {
+        HStack(spacing: 0) {
+            Text(jot.updatedAt, format: .dateTime.month().day().hour().minute())
+                .font(.system(size: 11, weight: .medium, design: .rounded))
+                .foregroundStyle(.tertiary)
+            
+            Spacer()
+            
+            HStack(spacing: 24) {
+                pinButton
+                photoPickerButton
+                micButton
+                deleteButton
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 16)
+    }
+    
+    // MARK: - 按钮
     private var pinButton: some View {
         Button(action: togglePin) {
             Image(systemName: jot.isPinned ? "pin.fill" : "pin")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(jot.isPinned ? .orange : .secondary)
-                .contentTransition(.symbolEffect(.replace))
+                .foregroundColor(jot.isPinned ? .orange : .secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
     }
     
-    private var copyButton: some View {
-        Button(action: copyContent) {
-            Image(systemName: showCopied ? "checkmark" : "doc.on.doc")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(showCopied ? .green : .secondary)
-                .contentTransition(.symbolEffect(.replace))
+    private var photoPickerButton: some View {
+        PhotosPicker(selection: $selectedPhotos, matching: .any(of: [.images, .videos])) {
+            Image(systemName: "photo.on.rectangle.angled")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .onChange(of: selectedPhotos) { _, newItems in
+            Task { await loadSelectedPhotos(newItems) }
+        }
+    }
+    
+    private var micButton: some View {
+        Button(action: toggleVoiceInput) {
+            Image(systemName: speechRecognizer.isRecording ? "waveform" : "mic")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(speechRecognizer.isRecording ? .red : .secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
     }
@@ -124,8 +172,10 @@ struct JotCardView: View {
     private var deleteButton: some View {
         Button(action: { showDeleteConfirm = true }) {
             Image(systemName: "trash")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(.secondary)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
         .confirmationDialog("删除这条笔记？", isPresented: $showDeleteConfirm) {
@@ -137,25 +187,25 @@ struct JotCardView: View {
         }
     }
     
+    // MARK: - 编辑器
     private var cardEditor: some View {
         TextEditor(text: $jot.content)
             .focused($isFocused)
             .scrollContentBackground(.hidden)
-            .font(.system(size: 18, weight: .regular, design: .default))
-            .lineSpacing(4)
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
-            .padding(.bottom, 12)
-            .onChange(of: jot.content) {
-                jot.updatedAt = Date()
-            }
-            .onAppear { 
+            .font(.system(size: 17))
+            .lineSpacing(12)
+            .padding(.horizontal, 24)
+            .padding(.top, jot.mediaItems.isEmpty ? 28 : 12)
+            .padding(.bottom, 20)
+            .onChange(of: jot.content) { jot.updatedAt = Date() }
+            .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     isFocused = true
                 }
             }
     }
     
+    // MARK: - 操作
     private func togglePin() {
         impactFeedback.impactOccurred(intensity: 0.5)
         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -163,26 +213,9 @@ struct JotCardView: View {
         }
     }
     
-    private func copyContent() {
-        UIPasteboard.general.string = jot.content
-        impactFeedback.impactOccurred(intensity: 0.4)
-        
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.6)) {
-            showCopied = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            withAnimation(.easeOut(duration: 0.2)) { 
-                showCopied = false 
-            }
-        }
-    }
-    
     private func toggleVoiceInput() {
         impactFeedback.impactOccurred(intensity: 0.5)
-        
-        // 设置转写完成回调
         speechRecognizer.onTranscriptionComplete = { text in
-            // 追加到笔记内容
             if jot.content.isEmpty {
                 jot.content = text
             } else {
@@ -190,12 +223,81 @@ struct JotCardView: View {
             }
             jot.updatedAt = Date()
         }
-        
         speechRecognizer.toggleRecording()
+    }
+    
+    // MARK: - 媒体处理
+    private func loadSelectedPhotos(_ items: [PhotosPickerItem]) async {
+        for item in items {
+            if let data = try? await item.loadTransferable(type: Data.self) {
+                let type: MediaType = item.supportedContentTypes.contains(.movie) ? .video : .image
+                var thumbnail: Data? = nil
+                
+                if type == .video {
+                    thumbnail = await generateVideoThumbnail(data)
+                }
+                
+                let mediaItem = MediaItem(type: type, data: data, thumbnail: thumbnail)
+                
+                await MainActor.run {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        jot.mediaItems.append(mediaItem)
+                        jot.updatedAt = Date()
+                    }
+                    impactFeedback.impactOccurred(intensity: 0.4)
+                }
+            }
+        }
+        selectedPhotos = []
+    }
+    
+    private func generateVideoThumbnail(_ data: Data) async -> Data? {
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString + ".mov")
+        try? data.write(to: tempURL)
+        defer { try? FileManager.default.removeItem(at: tempURL) }
+        
+        let asset = AVAsset(url: tempURL)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        
+        if let cgImage = try? generator.copyCGImage(
+            at: .zero, actualTime: nil
+        ) {
+            let uiImage = UIImage(cgImage: cgImage)
+            return uiImage.jpegData(compressionQuality: 0.7)
+        }
+        return nil
+    }
+    
+    private func handleDrop(_ providers: [NSItemProvider]) -> Bool {
+        for provider in providers {
+            if provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, _ in
+                    if let data = data {
+                        let item = MediaItem(type: .image, data: data)
+                        DispatchQueue.main.async {
+                            withAnimation { jot.mediaItems.append(item) }
+                            jot.updatedAt = Date()
+                            impactFeedback.impactOccurred(intensity: 0.5)
+                        }
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
+    private func removeMedia(_ item: MediaItem) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            jot.mediaItems.removeAll { $0.id == item.id }
+            jot.updatedAt = Date()
+        }
+        impactFeedback.impactOccurred(intensity: 0.4)
     }
 }
 
-// MARK: - 按钮缩放效果
+// MARK: - 按钮样式
 struct ScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

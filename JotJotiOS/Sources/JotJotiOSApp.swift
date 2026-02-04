@@ -8,7 +8,7 @@ struct JotJotiOSApp: App {
         let config = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false,
-            cloudKitDatabase: .automatic
+            cloudKitDatabase: .none  // 暂时禁用 CloudKit
         )
         do {
             return try ModelContainer(for: schema, configurations: [config])
