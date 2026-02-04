@@ -291,3 +291,8 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 ### 编译状态
 ✅ iOS BUILD SUCCEEDED
 ✅ Mac BUILD SUCCEEDED
+
+### 继续打磨
+- ✅ App 图标（双端）
+- ✅ 品牌色（双端）
+- ✅ iCloud 配置统一
