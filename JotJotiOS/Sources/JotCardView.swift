@@ -127,7 +127,8 @@ struct JotCardView: View {
             
             Spacer()
             
-            HStack(spacing: 24) {
+            HStack(spacing: 20) {
+                shareButton
                 pinButton
                 photoPickerButton
                 micButton
@@ -139,6 +140,17 @@ struct JotCardView: View {
     }
     
     // MARK: - 按钮
+    private var shareButton: some View {
+        ShareLink(item: jot.content) {
+            Image(systemName: "square.and.arrow.up")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.secondary)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScaleButtonStyle())
+    }
+    
     private var pinButton: some View {
         Button(action: togglePin) {
             Image(systemName: jot.isPinned ? "pin.fill" : "pin")

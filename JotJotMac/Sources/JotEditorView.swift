@@ -115,6 +115,13 @@ struct JotEditorView: View {
             .buttonStyle(.plain)
             .help("语音输入")
             
+            ShareLink(item: jot.content) {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+            .help("分享")
+            
             Spacer()
             
             Text("\(jot.content.count) 字")
