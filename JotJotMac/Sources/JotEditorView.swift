@@ -8,6 +8,7 @@ struct JotEditorView: View {
     @FocusState private var isFocused: Bool
     @State private var showCopied = false
     @State private var isDropTargeted = false
+    @StateObject private var speechRecognizer = SpeechRecognizer()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -57,8 +58,8 @@ struct JotEditorView: View {
                 }
             }
         }
-        .frame(width: 60, height: 60)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .frame(width: 80, height: 80)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .draggable(item.data)
         .contextMenu {
             Button("删除", role: .destructive) { removeMedia(item) }
@@ -102,6 +103,13 @@ struct JotEditorView: View {
             .buttonStyle(.plain)
             .help("添加图片/视频")
             
+            Button(action: toggleVoiceInput) {
+                Image(systemName: speechRecognizer.isRecording ? "waveform" : "mic")
+                    .foregroundStyle(speechRecognizer.isRecording ? .red : .secondary)
+            }
+            .buttonStyle(.plain)
+            .help("语音输入")
+            
             Spacer()
             
             Text("\(jot.content.count) 字")
@@ -114,9 +122,21 @@ struct JotEditorView: View {
     
     // MARK: - 操作
     private func togglePin() {
-        withAnimation(.spring(response: 0.3)) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
             jot.isPinned.toggle()
         }
+    }
+    
+    private func toggleVoiceInput() {
+        speechRecognizer.onTranscriptionComplete = { text in
+            if jot.content.isEmpty {
+                jot.content = text
+            } else {
+                jot.content += "\n" + text
+            }
+            jot.updatedAt = Date()
+        }
+        speechRecognizer.toggleRecording()
     }
     
     private func addMedia() {

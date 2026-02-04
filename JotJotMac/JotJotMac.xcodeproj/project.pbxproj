@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05A8217BB28BE6773A1C93AA /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */; };
 		1D4B7EA6413D3D916605610C /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D529A03C7637830382E01 /* WindowManager.swift */; };
 		36BEF2C0BEC41D900701A01E /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD258623EF840D098CAC45B /* HotKeyManager.swift */; };
 		4CE0F5F4343DDDD6A027ED47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35B7852AD8B89AFE8AFF8C7 /* ContentView.swift */; };
@@ -33,6 +34,7 @@
 		D554197347AE3BC1040F5AB3 /* JotJotMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotJotMacApp.swift; sourceTree = "<group>"; };
 		E35B7852AD8B89AFE8AFF8C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F813E928A3DAF7A2EFFB55CF /* AdvancedTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedTextEditor.swift; sourceTree = "<group>"; };
+		FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -48,6 +50,7 @@
 				9D31D3A4274C9A8552A840D9 /* JotListView.swift */,
 				38DA345B22CF7BEB109B51A1 /* JotRowView.swift */,
 				CF0F81809018D637375A81B8 /* MenuBarView.swift */,
+				FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */,
 				4D9D529A03C7637830382E01 /* WindowManager.swift */,
 			);
 			path = Sources;
@@ -142,6 +145,7 @@
 				A0480A51D87D3D859AF6D3CE /* JotListView.swift in Sources */,
 				B46C9B6071FB7243BAF1302A /* JotRowView.swift in Sources */,
 				D1CB33E7F1AC4AB848EC18CF /* MenuBarView.swift in Sources */,
+				05A8217BB28BE6773A1C93AA /* SpeechRecognizer.swift in Sources */,
 				1D4B7EA6413D3D916605610C /* WindowManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
