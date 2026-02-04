@@ -48,6 +48,48 @@
 			<key>uniqueIdentifier</key>
 			<string>18370A81-A291-47E4-AFA2-4007366857B9</string>
 		</dict>
+		<key>615D6FCD-F8D9-45BC-BBC9-118834C913D1</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>615D6FCD-F8D9-45BC-BBC9-118834C913D1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>JotJotiOS project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>JotJotiOS</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project JotJotiOS with scheme JotJotiOS</string>
+			<key>timeStartedRecording</key>
+			<real>791858427.26602006</real>
+			<key>timeStoppedRecording</key>
+			<real>791858446.82199204</real>
+			<key>title</key>
+			<string>Building project JotJotiOS with scheme JotJotiOS</string>
+			<key>uniqueIdentifier</key>
+			<string>615D6FCD-F8D9-45BC-BBC9-118834C913D1</string>
+		</dict>
 	</dict>
 </dict>
 </plist>

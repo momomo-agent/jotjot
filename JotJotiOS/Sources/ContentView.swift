@@ -27,20 +27,18 @@ struct ContentView: View {
                     .ignoresSafeArea(.all)
                 
                 // 卡片层（在下面）
-                ZStack {
-                    if jots.isEmpty {
-                        emptyState
-                    } else {
-                        cardStack(in: geo)
+                if !showList {
+                    ZStack {
+                        if jots.isEmpty {
+                            emptyState
+                        } else {
+                            cardStack(in: geo)
+                        }
                     }
+                    .padding(.top, 60) // 给顶部工具栏留空间
+                    .transition(.opacity.combined(with: .scale(scale: 0.85)))
+                    .zIndex(0)
                 }
-                .padding(.top, 60) // 给顶部工具栏留空间
-                .scaleEffect(showList ? 0.85 : 1)
-                .offset(y: showList ? -geo.size.height * 0.35 : 0)
-                .opacity(showList ? 0.6 : 1)
-                .animation(.spring(response: 0.4, dampingFraction: 0.85), value: showList)
-                .allowsHitTesting(!showList)
-                .zIndex(0)
                 
                 // 列表层（在卡片上面）
                 if !jots.isEmpty {
