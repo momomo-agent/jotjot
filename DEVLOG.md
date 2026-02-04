@@ -227,3 +227,20 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 
 ### 编译状态
 ✅ iOS BUILD SUCCEEDED
+
+---
+
+## 2026-02-05 链接预览功能
+
+### 完成内容
+- ✅ **链接自动检测** - NSDataDetector 检测 URL
+- ✅ **OG 元数据提取** - og:title, og:description, og:image
+- ✅ **预览卡片** - 显示标题、描述、缩略图
+- ✅ **平台识别** - Twitter/微博/小红书/B站/知乎/GitHub
+
+### 新增文件
+- `LinkPreviewFetcher.swift` - 链接预览提取器
+- `LinkPreviewCard.swift` - 预览卡片视图
+
+### 编译状态
+✅ iOS BUILD SUCCEEDED
