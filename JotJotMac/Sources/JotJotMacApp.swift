@@ -53,4 +53,5 @@ struct JotJotMacApp: App {
 
 extension Notification.Name {
     static let createNewJot = Notification.Name("createNewJot")
+    static let selectJot = Notification.Name("selectJot")
 }

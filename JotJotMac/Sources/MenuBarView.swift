@@ -34,7 +34,8 @@ struct MenuBarView: View {
     }
     
     private func openJot(_ jot: Jot) {
-        // TODO: 打开主窗口并选中
+        WindowManager.shared.show()
+        NotificationCenter.default.post(name: .selectJot, object: jot.id)
     }
     
     private func createNewJot() {

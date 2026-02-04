@@ -6,23 +6,33 @@ struct JotRowView: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.headline)
-                    .lineLimit(1)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 6) {
+                    if jot.isPinned {
+                        Image(systemName: "pin.fill")
+                            .font(.system(size: 10))
+                            .foregroundStyle(.orange)
+                    }
+                    
+                    Text(title)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                }
+                
+                if !preview.isEmpty {
+                    Text(preview)
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
                 
                 Text(jot.updatedAt, style: .relative)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .foregroundStyle(.tertiary)
             }
             
             Spacer()
-            
-            if jot.isPinned {
-                Image(systemName: "pin.fill")
-                    .font(.caption)
-                    .foregroundStyle(.orange)
-            }
         }
         .padding(.vertical, 6)
         .contentShape(Rectangle())
@@ -30,9 +40,15 @@ struct JotRowView: View {
     }
     
     private var title: String {
-        let firstLine = jot.content
-            .components(separatedBy: .newlines)
-            .first ?? ""
-        return firstLine.isEmpty ? "新笔记" : firstLine
+        let line = jot.content.components(separatedBy: .newlines).first ?? ""
+        return line.isEmpty ? "新笔记" : String(line.prefix(50))
+    }
+    
+    private var preview: String {
+        let lines = jot.content.components(separatedBy: .newlines)
+        if lines.count > 1 {
+            return lines.dropFirst().joined(separator: " ").trimmingCharacters(in: .whitespaces)
+        }
+        return ""
     }
 }

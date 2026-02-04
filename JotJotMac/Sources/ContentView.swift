@@ -30,6 +30,14 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .createNewJot)) { _ in
             createNewJot()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .selectJot)) { notification in
+            if let id = notification.object as? UUID,
+               let jot = jots.first(where: { $0.id == id }) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    selectedJot = jot
+                }
+            }
+        }
     }
     
     private func createNewJot() {
