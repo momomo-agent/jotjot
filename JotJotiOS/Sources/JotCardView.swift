@@ -14,12 +14,15 @@ struct JotCardView: View {
     @State private var selectedPhotos: [PhotosPickerItem] = []
     @State private var isDropTargeted = false
     @StateObject private var speechRecognizer = SpeechRecognizer()
+    @State private var linkPreviews: [LinkPreviewFetcher.LinkPreview] = []
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+    private let linkFetcher = LinkPreviewFetcher()
     
     var body: some View {
         VStack(spacing: 0) {
             cardEditor
+            linkPreviewSection
             cardFooter
         }
         .background(cardBackground)
@@ -31,6 +34,12 @@ struct JotCardView: View {
         .padding(.top, 16)
         .padding(.bottom, keyboardHeight > 0 ? 8 : 20)
         .onAppear { impactFeedback.prepare() }
+        .onChange(of: jot.content) { _, newValue in
+            detectLinks(in: newValue)
+        }
+        .task {
+            detectLinks(in: jot.content)
+        }
     }
     
     // MARK: - 媒体网格
@@ -283,6 +292,50 @@ struct JotCardView: View {
             jot.updatedAt = Date()
         }
         impactFeedback.impactOccurred(intensity: 0.4)
+    }
+    
+    // MARK: - 链接预览
+    
+    @ViewBuilder
+    private var linkPreviewSection: some View {
+        if !linkPreviews.isEmpty {
+            VStack(spacing: 8) {
+                ForEach(linkPreviews, id: \.url) { preview in
+                    LinkPreviewCard(preview: preview)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 12)
+        }
+    }
+    
+    private func detectLinks(in text: String) {
+        let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let range = NSRange(text.startIndex..., in: text)
+        
+        var urls: [URL] = []
+        detector?.enumerateMatches(in: text, range: range) { match, _, _ in
+            if let url = match?.url {
+                urls.append(url)
+            }
+        }
+        
+        // 只取前 3 个链接
+        let urlsToFetch = Array(urls.prefix(3))
+        
+        Task {
+            var previews: [LinkPreviewFetcher.LinkPreview] = []
+            for url in urlsToFetch {
+                if let preview = await linkFetcher.fetchPreview(for: url) {
+                    previews.append(preview)
+                }
+            }
+            await MainActor.run {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    linkPreviews = previews
+                }
+            }
+        }
     }
 }
 
