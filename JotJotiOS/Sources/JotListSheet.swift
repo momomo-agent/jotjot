@@ -4,14 +4,24 @@ struct JotListSheet: View {
     let jots: [Jot]
     @Binding var currentIndex: Int
     @Environment(\.dismiss) private var dismiss
+    @State private var searchText = ""
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+    
+    private var filteredJots: [(Int, Jot)] {
+        if searchText.isEmpty {
+            return Array(jots.enumerated()).map { ($0.offset, $0.element) }
+        }
+        return Array(jots.enumerated())
+            .filter { $0.element.content.localizedCaseInsensitiveContains(searchText) }
+            .map { ($0.offset, $0.element) }
+    }
     
     var body: some View {
         NavigationStack {
             ScrollViewReader { proxy in
                 List {
-                    ForEach(Array(jots.enumerated()), id: \.element.id) { index, jot in
+                    ForEach(filteredJots, id: \.1.id) { index, jot in
                         Button {
                             impactFeedback.impactOccurred()
                             currentIndex = index
@@ -26,14 +36,12 @@ struct JotListSheet: View {
                 }
                 .listStyle(.plain)
                 .onAppear {
-                    // 滚动到当前选中的笔记
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        withAnimation {
-                            proxy.scrollTo(currentIndex, anchor: .center)
-                        }
+                        withAnimation { proxy.scrollTo(currentIndex, anchor: .center) }
                     }
                 }
             }
+            .searchable(text: $searchText, prompt: "搜索笔记")
             .navigationTitle("所有笔记")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

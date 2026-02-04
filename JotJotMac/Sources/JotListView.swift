@@ -5,9 +5,15 @@ struct JotListView: View {
     let jots: [Jot]
     @Binding var selectedJot: Jot?
     @Environment(\.modelContext) private var modelContext
+    @State private var searchText = ""
     
-    var pinnedJots: [Jot] { jots.filter { $0.isPinned } }
-    var unpinnedJots: [Jot] { jots.filter { !$0.isPinned } }
+    private var filteredJots: [Jot] {
+        if searchText.isEmpty { return jots }
+        return jots.filter { $0.content.localizedCaseInsensitiveContains(searchText) }
+    }
+    
+    private var pinnedJots: [Jot] { filteredJots.filter { $0.isPinned } }
+    private var unpinnedJots: [Jot] { filteredJots.filter { !$0.isPinned } }
     
     var body: some View {
         List(selection: $selectedJot) {
@@ -37,6 +43,7 @@ struct JotListView: View {
             }
         }
         .listStyle(.sidebar)
+        .searchable(text: $searchText, prompt: "搜索")
         .toolbar {
             ToolbarItem {
                 Button(action: createNewJot) {
