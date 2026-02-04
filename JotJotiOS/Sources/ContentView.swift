@@ -4,7 +4,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Jot.updatedAt, order: .reverse) private var jots: [Jot]
-    @State private var currentIndex = 0
+    @State private var currentJotId: UUID? = nil  // 改用 ID 追踪
     @State private var dragOffset: CGFloat = 0
     @State private var showList = false
     @State private var keyboardHeight: CGFloat = 0
@@ -13,6 +13,12 @@ struct ContentView: View {
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     private let selectionFeedback = UISelectionFeedbackGenerator()
     
+    // 计算当前索引
+    private var currentIndex: Int {
+        guard let id = currentJotId else { return 0 }
+        return jots.firstIndex(where: { $0.id == id }) ?? 0
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -20,13 +26,7 @@ struct ContentView: View {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea(.all)
                 
-                // 背后的列表（始终存在，showList 时显示）
-                if !jots.isEmpty {
-                    listView(in: geo)
-                        .opacity(showList ? 1 : 0)
-                }
-                
-                // 前景的卡片
+                // 卡片层（在下面）
                 ZStack {
                     if jots.isEmpty {
                         emptyState
@@ -34,14 +34,25 @@ struct ContentView: View {
                         cardStack(in: geo)
                     }
                 }
+                .padding(.top, 60) // 给顶部工具栏留空间
                 .scaleEffect(showList ? 0.85 : 1)
                 .offset(y: showList ? -geo.size.height * 0.35 : 0)
                 .opacity(showList ? 0.6 : 1)
                 .animation(.spring(response: 0.4, dampingFraction: 0.85), value: showList)
                 .allowsHitTesting(!showList)
+                .zIndex(0)
                 
-                // 顶部工具栏
+                // 列表层（在卡片上面）
+                if !jots.isEmpty {
+                    listView(in: geo)
+                        .opacity(showList ? 1 : 0)
+                        .allowsHitTesting(showList)
+                        .zIndex(1)
+                }
+                
+                // 顶部工具栏（最上面）
                 topBar
+                    .zIndex(2)
             }
         }
         .onAppear {
@@ -78,6 +89,8 @@ struct ContentView: View {
                 }
             }
             .padding(.horizontal, 8)
+            .padding(.top, 4)
+            .background(.ultraThinMaterial)
             
             Spacer()
         }
@@ -122,8 +135,7 @@ struct ContentView: View {
     @ViewBuilder
     private func cardStack(in geo: GeometryProxy) -> some View {
         let screenWidth = geo.size.width
-        // 安全获取当前索引
-        let safeCurrentIndex = min(max(0, currentIndex), max(0, jots.count - 1))
+        let safeCurrentIndex = currentIndex
         
         ZStack {
             // 点击背景收起键盘
@@ -158,11 +170,17 @@ struct ContentView: View {
         }
         .gesture(jots.isEmpty ? nil : swipeGesture)
         .onChange(of: jots.count) { oldCount, newCount in
-            // 当笔记数量变化时，确保 currentIndex 有效
+            // 当笔记数量变化时，确保 currentJotId 有效
             if newCount == 0 {
-                currentIndex = 0
-            } else if currentIndex >= newCount {
-                currentIndex = newCount - 1
+                currentJotId = nil
+            } else if currentJotId == nil || !jots.contains(where: { $0.id == currentJotId }) {
+                currentJotId = jots.first?.id
+            }
+        }
+        .onAppear {
+            // 初始化时设置 currentJotId
+            if currentJotId == nil, let first = jots.first {
+                currentJotId = first.id
             }
         }
     }
@@ -249,8 +267,7 @@ struct ContentView: View {
         let threshold: CGFloat = 60
         let velocity = value.predictedEndTranslation.width - value.translation.width
         
-        // 确保 currentIndex 在有效范围内
-        let safeCurrentIndex = min(max(0, currentIndex), jots.count - 1)
+        let safeCurrentIndex = currentIndex
         var didSwitch = false
         var newIndex = safeCurrentIndex
         
@@ -271,7 +288,7 @@ struct ContentView: View {
         
         // 丝滑弹簧动画
         withAnimation(.spring(response: 0.4, dampingFraction: 0.75, blendDuration: 0)) {
-            currentIndex = newIndex
+            currentJotId = jots[newIndex].id
             dragOffset = 0
         }
     }
@@ -309,7 +326,7 @@ struct ContentView: View {
     private func listRow(jot: Jot, index: Int, isSelected: Bool) -> some View {
         Button {
             impactFeedback.impactOccurred(intensity: 0.5)
-            currentIndex = index
+            currentJotId = jot.id
             withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
                 showList = false
             }
@@ -388,7 +405,7 @@ struct ContentView: View {
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             let jot = Jot(content: "")
             modelContext.insert(jot)
-            currentIndex = 0
+            currentJotId = jot.id
         }
     }
     
@@ -396,17 +413,16 @@ struct ContentView: View {
         // 找到当前 jot 的索引
         guard let index = jots.firstIndex(where: { $0.id == jot.id }) else { return }
         
-        // 计算删除后的新索引
+        // 计算删除后应该显示哪个笔记
         let newCount = jots.count - 1
-        let newIndex: Int
+        let newJotId: UUID?
         if newCount == 0 {
-            newIndex = 0
-        } else if currentIndex >= newCount {
-            newIndex = newCount - 1
-        } else if index < currentIndex {
-            newIndex = currentIndex - 1
+            newJotId = nil
+        } else if index >= newCount {
+            newJotId = jots[newCount - 1].id
         } else {
-            newIndex = currentIndex
+            // 显示下一个，如果删的是最后一个就显示前一个
+            newJotId = jots[index == jots.count - 1 ? index - 1 : index + 1].id
         }
         
         // 触感反馈
@@ -414,7 +430,7 @@ struct ContentView: View {
         feedback.notificationOccurred(.success)
         
         withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-            currentIndex = newIndex
+            currentJotId = newJotId
             modelContext.delete(jot)
         }
     }
