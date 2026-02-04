@@ -244,3 +244,19 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 
 ### 编译状态
 ✅ iOS BUILD SUCCEEDED
+
+---
+
+## 2026-02-05 AI 智能合并推荐
+
+### 完成内容
+- ✅ **相似度分析** - 关键词重叠、标题相似、时间接近
+- ✅ **合并推荐卡片** - 底部浮层显示推荐
+- ✅ **一键合并** - 合并内容和媒体，删除重复笔记
+
+### 新增文件
+- `JotSimilarityAnalyzer.swift` - 相似度分析器
+- `MergeSuggestionCard.swift` - 合并推荐卡片
+
+### 编译状态
+✅ iOS BUILD SUCCEEDED
