@@ -12,6 +12,7 @@ targets:
     sources:
       - path: Sources
       - path: ../JotJotKit/Sources
+      - path: Resources/Assets.xcassets
     entitlements:
       path: Resources/JotJot.entitlements
     settings:
