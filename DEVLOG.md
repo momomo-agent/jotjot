@@ -275,3 +275,19 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 | 图片/视频 | ✅ | ✅ |
 | 语音输入 | ✅ | ✅ |
 | iCloud 同步 | ✅ | ✅ |
+
+---
+
+## 2026-02-05 深夜打磨
+
+### 新增功能
+- ✅ 搜索功能（双端）
+- ✅ 分享功能（双端）
+- ✅ iOS 字数统计
+
+### 配置优化
+- ✅ 统一 iOS/Mac iCloud container ID
+
+### 编译状态
+✅ iOS BUILD SUCCEEDED
+✅ Mac BUILD SUCCEEDED
