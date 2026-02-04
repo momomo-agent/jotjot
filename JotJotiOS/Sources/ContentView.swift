@@ -77,6 +77,7 @@ struct ContentView: View {
         .onChange(of: jots.count) { _, _ in
             checkForSimilarJots()
         }
+        .keyboardShortcut("n", modifiers: .command)
     }
     
     // MARK: - 顶部工具栏
