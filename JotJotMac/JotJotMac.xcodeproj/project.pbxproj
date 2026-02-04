@@ -13,6 +13,7 @@
 		3D42D93489AC9311459AC391 /* LinkPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D687DA746773B9766651C7 /* LinkPreviewCard.swift */; };
 		4CE0F5F4343DDDD6A027ED47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35B7852AD8B89AFE8AFF8C7 /* ContentView.swift */; };
 		53D4B076C293BEAEF86E571F /* JotEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B419F2A0CFD07E6330F623E /* JotEditorView.swift */; };
+		69A36BDD862F3F25809AE4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790064AFFD1FD736813978C3 /* Assets.xcassets */; };
 		801EB8CA4CA38EBDA92D39D0 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A461585AFA47BB91865E5D1E /* EmptyStateView.swift */; };
 		90E4237993B2A48C7F855286 /* MarkdownTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187884755036CC5B78224A92 /* MarkdownTextEditor.swift */; };
 		9506B71053D470D9E3830345 /* JotJotMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554197347AE3BC1040F5AB3 /* JotJotMacApp.swift */; };
@@ -38,6 +39,7 @@
 		6152EEF638421A588AC66508 /* JotJotMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JotJotMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B419F2A0CFD07E6330F623E /* JotEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotEditorView.swift; sourceTree = "<group>"; };
 		71D687DA746773B9766651C7 /* LinkPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewCard.swift; sourceTree = "<group>"; };
+		790064AFFD1FD736813978C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D31D3A4274C9A8552A840D9 /* JotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotListView.swift; sourceTree = "<group>"; };
 		A461585AFA47BB91865E5D1E /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		AC40F56673B04155744870C1 /* Jot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jot.swift; sourceTree = "<group>"; };
@@ -83,9 +85,18 @@
 			path = ../JotJotKit/Sources;
 			sourceTree = "<group>";
 		};
+		896BDA21847E910E05585C62 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				790064AFFD1FD736813978C3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9AF988FCF021FC679B5C81AB = {
 			isa = PBXGroup;
 			children = (
+				896BDA21847E910E05585C62 /* Resources */,
 				0759E5F7EAF02DD37CD2C8A1 /* Sources */,
 				570A856FD17A1AAC098CCD83 /* Sources */,
 				FBD74D51DF8120E8B0A264DB /* Products */,
@@ -108,6 +119,7 @@
 			buildConfigurationList = 6041C5779BC78F6DB185128D /* Build configuration list for PBXNativeTarget "JotJotMac" */;
 			buildPhases = (
 				FE80FFDC03E00F18610959B2 /* Sources */,
+				71883C5B4B13DEC1B6007736 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -147,6 +159,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71883C5B4B13DEC1B6007736 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69A36BDD862F3F25809AE4B3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FE80FFDC03E00F18610959B2 /* Sources */ = {

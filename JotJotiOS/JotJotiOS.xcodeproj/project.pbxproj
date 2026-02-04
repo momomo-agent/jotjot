@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A96880A1D53B9361150008B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE225C700232F37C6686C2B /* Assets.xcassets */; };
 		15C90FFD07CDA02A2A54069F /* MarkdownTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8E9F41052D75E58D57EC70 /* MarkdownTextEditor.swift */; };
 		1972A659E01462B101508999 /* JotListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA485AB4774E1FB53EEB1C /* JotListSheet.swift */; };
 		4AFD60B7BCD0D664303C96D3 /* MergeSuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F1D7316164E2B9B0D3701 /* MergeSuggestionCard.swift */; };
@@ -28,6 +29,7 @@
 		3AEA485AB4774E1FB53EEB1C /* JotListSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotListSheet.swift; sourceTree = "<group>"; };
 		4626311E851F5A41A8A92AA7 /* LinkPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewCard.swift; sourceTree = "<group>"; };
 		47A4D92A2FA6E1933E086A5D /* JotCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotCardView.swift; sourceTree = "<group>"; };
+		4CE225C700232F37C6686C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B0F1D7316164E2B9B0D3701 /* MergeSuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSuggestionCard.swift; sourceTree = "<group>"; };
 		722B6C963845192B23F80352 /* Jot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jot.swift; sourceTree = "<group>"; };
 		88BB3CA159B6BDD1752FA673 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		5CF08E83DA4EEA715FEFC6BD = {
 			isa = PBXGroup;
 			children = (
+				C1F560D6D0B4CE5AC6C7EC45 /* Resources */,
 				BB0051C497DF7DA6B30ACE1F /* Sources */,
 				A76394EAC0C638337F1CC8A9 /* Sources */,
 				0D235249E6BD881C7FBC6C28 /* Products */,
@@ -85,6 +88,14 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		C1F560D6D0B4CE5AC6C7EC45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4CE225C700232F37C6686C2B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +104,7 @@
 			buildConfigurationList = A20D06A5702F393B072812A3 /* Build configuration list for PBXNativeTarget "JotJotiOS" */;
 			buildPhases = (
 				DA6CE86B7EA22AD109F28405 /* Sources */,
+				05D6D3FAAE4CC4E614CDB404 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -143,6 +155,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05D6D3FAAE4CC4E614CDB404 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A96880A1D53B9361150008B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DA6CE86B7EA22AD109F28405 /* Sources */ = {

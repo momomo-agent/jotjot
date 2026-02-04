@@ -6,7 +6,7 @@
 	<integer>11</integer>
 	<key>logs</key>
 	<dict>
-		<key>18370A81-A291-47E4-AFA2-4007366857B9</key>
+		<key>3B854C62-8226-4682-A0D2-58FA15860FAA</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>18370A81-A291-47E4-AFA2-4007366857B9.xcactivitylog</string>
+			<string>3B854C62-8226-4682-A0D2-58FA15860FAA.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -38,15 +38,15 @@
 			<key>schemeIdentifier-sharedScheme</key>
 			<integer>1</integer>
 			<key>signature</key>
-			<string>Archiving project JotJotiOS with scheme JotJotiOS</string>
+			<string>Building project JotJotiOS with scheme JotJotiOS and configuration Debug</string>
 			<key>timeStartedRecording</key>
-			<real>791826050.58640504</real>
+			<real>791862863.11401904</real>
 			<key>timeStoppedRecording</key>
-			<real>791826060.24525106</real>
+			<real>791862871.94042802</real>
 			<key>title</key>
-			<string>Archiving project JotJotiOS with scheme JotJotiOS</string>
+			<string>Building project JotJotiOS with scheme JotJotiOS and configuration Debug</string>
 			<key>uniqueIdentifier</key>
-			<string>18370A81-A291-47E4-AFA2-4007366857B9</string>
+			<string>3B854C62-8226-4682-A0D2-58FA15860FAA</string>
 		</dict>
 		<key>615D6FCD-F8D9-45BC-BBC9-118834C913D1</key>
 		<dict>
