@@ -209,3 +209,21 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 ### 编译状态
 ✅ iOS BUILD SUCCEEDED
 ✅ Mac BUILD SUCCEEDED
+
+---
+
+## 2026-02-05 Markdown 实时渲染
+
+### 完成内容
+- ✅ **Markdown 编辑器** - 实时高亮渲染
+- ✅ **标题** - # ## ### 三级标题
+- ✅ **粗体/斜体** - **bold** / *italic*
+- ✅ **代码** - `inline code` 粉色+灰底
+- ✅ **删除线** - ~~strikethrough~~
+- ✅ **链接** - [text](url) 和纯 URL
+- ✅ **任务列表** - [ ] / [x] 转换为 ☐/☑
+- ✅ **引用块** - > quote 斜体灰色
+- ✅ **内联图片** - ![](uuid) 格式
+
+### 编译状态
+✅ iOS BUILD SUCCEEDED
