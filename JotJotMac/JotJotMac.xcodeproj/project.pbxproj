@@ -10,29 +10,41 @@
 		05A8217BB28BE6773A1C93AA /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */; };
 		1D4B7EA6413D3D916605610C /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D529A03C7637830382E01 /* WindowManager.swift */; };
 		36BEF2C0BEC41D900701A01E /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD258623EF840D098CAC45B /* HotKeyManager.swift */; };
+		3D42D93489AC9311459AC391 /* LinkPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D687DA746773B9766651C7 /* LinkPreviewCard.swift */; };
 		4CE0F5F4343DDDD6A027ED47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35B7852AD8B89AFE8AFF8C7 /* ContentView.swift */; };
 		53D4B076C293BEAEF86E571F /* JotEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B419F2A0CFD07E6330F623E /* JotEditorView.swift */; };
 		801EB8CA4CA38EBDA92D39D0 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A461585AFA47BB91865E5D1E /* EmptyStateView.swift */; };
+		90E4237993B2A48C7F855286 /* MarkdownTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187884755036CC5B78224A92 /* MarkdownTextEditor.swift */; };
 		9506B71053D470D9E3830345 /* JotJotMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554197347AE3BC1040F5AB3 /* JotJotMacApp.swift */; };
+		95449695D57D16793BB13DF5 /* MergeSuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A4172728FF4748C2BAFE7 /* MergeSuggestionCard.swift */; };
 		A0480A51D87D3D859AF6D3CE /* JotListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D31D3A4274C9A8552A840D9 /* JotListView.swift */; };
+		AEDF0B5F21129F7576811972 /* JotSimilarityAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F073AC28C1DD80C950DF1C /* JotSimilarityAnalyzer.swift */; };
 		B46C9B6071FB7243BAF1302A /* JotRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DA345B22CF7BEB109B51A1 /* JotRowView.swift */; };
 		C28340A6D4145E28AD0B253C /* Jot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F56673B04155744870C1 /* Jot.swift */; };
 		D1CB33E7F1AC4AB848EC18CF /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0F81809018D637375A81B8 /* MenuBarView.swift */; };
+		E96FB0EEFD703C5989EAEC48 /* LinkPreviewFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E9153E547C1D9DAFFE992 /* LinkPreviewFetcher.swift */; };
+		EC5D58C76DAA0DF9B3193872 /* RichTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DC629B457266006A402528 /* RichTextHelper.swift */; };
 		F0C020141D2A8226E8AE84E1 /* AdvancedTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F813E928A3DAF7A2EFFB55CF /* AdvancedTextEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		187884755036CC5B78224A92 /* MarkdownTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextEditor.swift; sourceTree = "<group>"; };
+		28DC629B457266006A402528 /* RichTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextHelper.swift; sourceTree = "<group>"; };
 		38DA345B22CF7BEB109B51A1 /* JotRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotRowView.swift; sourceTree = "<group>"; };
 		3CD258623EF840D098CAC45B /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
+		410A4172728FF4748C2BAFE7 /* MergeSuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSuggestionCard.swift; sourceTree = "<group>"; };
 		4D9D529A03C7637830382E01 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		555E9153E547C1D9DAFFE992 /* LinkPreviewFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewFetcher.swift; sourceTree = "<group>"; };
 		6152EEF638421A588AC66508 /* JotJotMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JotJotMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B419F2A0CFD07E6330F623E /* JotEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotEditorView.swift; sourceTree = "<group>"; };
+		71D687DA746773B9766651C7 /* LinkPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewCard.swift; sourceTree = "<group>"; };
 		9D31D3A4274C9A8552A840D9 /* JotListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotListView.swift; sourceTree = "<group>"; };
 		A461585AFA47BB91865E5D1E /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		AC40F56673B04155744870C1 /* Jot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jot.swift; sourceTree = "<group>"; };
 		CF0F81809018D637375A81B8 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		D554197347AE3BC1040F5AB3 /* JotJotMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotJotMacApp.swift; sourceTree = "<group>"; };
 		E35B7852AD8B89AFE8AFF8C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E3F073AC28C1DD80C950DF1C /* JotSimilarityAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotSimilarityAnalyzer.swift; sourceTree = "<group>"; };
 		F813E928A3DAF7A2EFFB55CF /* AdvancedTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedTextEditor.swift; sourceTree = "<group>"; };
 		FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,7 +61,12 @@
 				D554197347AE3BC1040F5AB3 /* JotJotMacApp.swift */,
 				9D31D3A4274C9A8552A840D9 /* JotListView.swift */,
 				38DA345B22CF7BEB109B51A1 /* JotRowView.swift */,
+				E3F073AC28C1DD80C950DF1C /* JotSimilarityAnalyzer.swift */,
+				71D687DA746773B9766651C7 /* LinkPreviewCard.swift */,
+				555E9153E547C1D9DAFFE992 /* LinkPreviewFetcher.swift */,
+				187884755036CC5B78224A92 /* MarkdownTextEditor.swift */,
 				CF0F81809018D637375A81B8 /* MenuBarView.swift */,
+				410A4172728FF4748C2BAFE7 /* MergeSuggestionCard.swift */,
 				FBCE4CBACF61C80724CF5D15 /* SpeechRecognizer.swift */,
 				4D9D529A03C7637830382E01 /* WindowManager.swift */,
 			);
@@ -60,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				AC40F56673B04155744870C1 /* Jot.swift */,
+				28DC629B457266006A402528 /* RichTextHelper.swift */,
 			);
 			name = Sources;
 			path = ../JotJotKit/Sources;
@@ -144,7 +162,13 @@
 				9506B71053D470D9E3830345 /* JotJotMacApp.swift in Sources */,
 				A0480A51D87D3D859AF6D3CE /* JotListView.swift in Sources */,
 				B46C9B6071FB7243BAF1302A /* JotRowView.swift in Sources */,
+				AEDF0B5F21129F7576811972 /* JotSimilarityAnalyzer.swift in Sources */,
+				3D42D93489AC9311459AC391 /* LinkPreviewCard.swift in Sources */,
+				E96FB0EEFD703C5989EAEC48 /* LinkPreviewFetcher.swift in Sources */,
+				90E4237993B2A48C7F855286 /* MarkdownTextEditor.swift in Sources */,
 				D1CB33E7F1AC4AB848EC18CF /* MenuBarView.swift in Sources */,
+				95449695D57D16793BB13DF5 /* MergeSuggestionCard.swift in Sources */,
+				EC5D58C76DAA0DF9B3193872 /* RichTextHelper.swift in Sources */,
 				05A8217BB28BE6773A1C93AA /* SpeechRecognizer.swift in Sources */,
 				1D4B7EA6413D3D916605610C /* WindowManager.swift in Sources */,
 			);

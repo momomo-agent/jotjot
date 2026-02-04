@@ -9,18 +9,23 @@ struct JotEditorView: View {
     @State private var showCopied = false
     @State private var isDropTargeted = false
     @StateObject private var speechRecognizer = SpeechRecognizer()
+    @State private var linkPreviews: [LinkPreviewFetcher.LinkPreview] = []
+    
+    private let linkFetcher = LinkPreviewFetcher()
     
     var body: some View {
         VStack(spacing: 0) {
             editorToolbar
             Divider()
             mediaGrid
+            linkPreviewSection
             editorArea
         }
         .frame(minWidth: 300)
         .overlay(dropOverlay)
         .onDrop(of: [.image, .movie, .fileURL], isTargeted: $isDropTargeted, perform: handleDrop)
-        .onAppear { isFocused = true }
+        .onAppear { isFocused = true; detectLinks() }
+        .onChange(of: jot.content) { _, _ in detectLinks() }
     }
     
     // MARK: - 媒体网格
@@ -206,6 +211,44 @@ struct JotEditorView: View {
         withAnimation {
             jot.mediaItems.removeAll { $0.id == item.id }
             jot.updatedAt = Date()
+        }
+    }
+    
+    // MARK: - 链接预览
+    
+    @ViewBuilder
+    private var linkPreviewSection: some View {
+        if !linkPreviews.isEmpty {
+            VStack(spacing: 6) {
+                ForEach(linkPreviews, id: \.url) { preview in
+                    LinkPreviewCard(preview: preview)
+                }
+            }
+            .padding(12)
+            Divider()
+        }
+    }
+    
+    private func detectLinks() {
+        let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let range = NSRange(jot.content.startIndex..., in: jot.content)
+        
+        var urls: [URL] = []
+        detector?.enumerateMatches(in: jot.content, range: range) { match, _, _ in
+            if let url = match?.url { urls.append(url) }
+        }
+        
+        let urlsToFetch = Array(urls.prefix(3))
+        Task {
+            var previews: [LinkPreviewFetcher.LinkPreview] = []
+            for url in urlsToFetch {
+                if let p = await linkFetcher.fetchPreview(for: url) {
+                    previews.append(p)
+                }
+            }
+            await MainActor.run {
+                withAnimation { linkPreviews = previews }
+            }
         }
     }
 }
