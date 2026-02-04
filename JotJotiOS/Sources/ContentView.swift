@@ -41,10 +41,9 @@ struct ContentView: View {
                 }
                 
                 // 列表层（在卡片上面）
-                if !jots.isEmpty {
+                if showList && !jots.isEmpty {
                     listView(in: geo)
-                        .opacity(showList ? 1 : 0)
-                        .allowsHitTesting(showList)
+                        .transition(.opacity)
                         .zIndex(1)
                 }
                 
