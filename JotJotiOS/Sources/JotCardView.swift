@@ -153,6 +153,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel("分享")
     }
     
     private var pinButton: some View {
@@ -164,6 +165,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(jot.isPinned ? "取消固定" : "固定")
     }
     
     private var photoPickerButton: some View {
@@ -175,6 +177,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel("添加图片或视频")
         .onChange(of: selectedPhotos) { _, newItems in
             Task { await loadSelectedPhotos(newItems) }
         }
@@ -189,6 +192,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(speechRecognizer.isRecording ? "停止录音" : "语音输入")
     }
     
     private var deleteButton: some View {
@@ -200,6 +204,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel("删除")
         .confirmationDialog("删除这条笔记？", isPresented: $showDeleteConfirm) {
             Button("删除", role: .destructive) {
                 impactFeedback.impactOccurred(intensity: 0.6)
