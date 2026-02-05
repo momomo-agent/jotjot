@@ -326,3 +326,11 @@ JotJot 从 55% → 85%
 ### App Store 准备
 - ✅ 元数据（名称、描述、关键词）
 - ✅ 隐私政策
+
+### Dark Mode 优化
+- ✅ 卡片背景改用 secondarySystemBackground
+- ✅ 移除标题栏分割线
+
+### 键盘快捷键
+- ✅ iOS 方向键导航（iPad）
+- ✅ Mac ⌘P 固定快捷键
