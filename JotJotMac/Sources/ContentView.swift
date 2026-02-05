@@ -54,6 +54,11 @@ struct ContentView: View {
                 withAnimation { selectedJot = jot }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .deleteJot)) { _ in
+            if let jot = selectedJot {
+                deleteJot(jot)
+            }
+        }
     }
     
     private func createNewJot() {
@@ -61,6 +66,15 @@ struct ContentView: View {
             let jot = Jot(content: "")
             modelContext.insert(jot)
             selectedJot = jot
+        }
+    }
+    
+    private func deleteJot(_ jot: Jot) {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+            if selectedJot?.id == jot.id {
+                selectedJot = jots.first(where: { $0.id != jot.id })
+            }
+            modelContext.delete(jot)
         }
     }
     

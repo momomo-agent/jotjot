@@ -40,6 +40,11 @@ struct JotJotMacApp: App {
                     NotificationCenter.default.post(name: .togglePin, object: nil)
                 }
                 .keyboardShortcut("p", modifiers: .command)
+                
+                Button("删除笔记") {
+                    NotificationCenter.default.post(name: .deleteJot, object: nil)
+                }
+                .keyboardShortcut(.delete, modifiers: .command)
             }
         }
         
@@ -62,4 +67,5 @@ extension Notification.Name {
     static let createNewJot = Notification.Name("createNewJot")
     static let selectJot = Notification.Name("selectJot")
     static let togglePin = Notification.Name("togglePin")
+    static let deleteJot = Notification.Name("deleteJot")
 }
