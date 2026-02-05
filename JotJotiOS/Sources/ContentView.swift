@@ -108,7 +108,6 @@ struct ContentView: View {
             }
             .padding(.horizontal, 8)
             .padding(.top, 4)
-            .background(.ultraThinMaterial)
             
             Spacer()
         }
