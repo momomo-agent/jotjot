@@ -168,6 +168,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .keyboardShortcut("p", modifiers: .command)
         .accessibilityLabel(jot.isPinned ? "取消固定" : "固定")
     }
     
