@@ -314,3 +314,15 @@ INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "JotJot 需要语音识别权
 
 ### 进度
 JotJot 从 55% → 85%
+
+---
+
+## 2026-02-05 上午继续
+
+### 新增功能
+- ✅ iOS Widget 小组件
+- ✅ iOS 启动动画
+
+### App Store 准备
+- ✅ 元数据（名称、描述、关键词）
+- ✅ 隐私政策
