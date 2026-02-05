@@ -77,7 +77,8 @@ struct ContentView: View {
         .onChange(of: jots.count) { _, _ in
             checkForSimilarJots()
         }
-        .keyboardShortcut("n", modifiers: .command)
+        .onKeyPress(.leftArrow) { navigateToPrevious(); return .handled }
+        .onKeyPress(.rightArrow) { navigateToNext(); return .handled }
     }
     
     // MARK: - 顶部工具栏
@@ -415,6 +416,22 @@ struct ContentView: View {
     }
     
     // MARK: - 操作
+    
+    private func navigateToPrevious() {
+        guard !jots.isEmpty, currentIndex > 0 else { return }
+        impactFeedback.impactOccurred(intensity: 0.5)
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+            currentJotId = jots[currentIndex - 1].id
+        }
+    }
+    
+    private func navigateToNext() {
+        guard !jots.isEmpty, currentIndex < jots.count - 1 else { return }
+        impactFeedback.impactOccurred(intensity: 0.5)
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+            currentJotId = jots[currentIndex + 1].id
+        }
+    }
     
     private func createNewJot() {
         impactFeedback.impactOccurred(intensity: 0.5)
