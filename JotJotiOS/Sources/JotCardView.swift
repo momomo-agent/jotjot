@@ -104,12 +104,15 @@ struct JotCardView: View {
     // MARK: - 背景
     private var cardBackground: some View {
         ZStack {
+            // 卡片填充 - light/dark 都有实体感
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(.background)
+                .fill(Color(.secondarySystemBackground))
+            
+            // 顶部高光 - 适配 light/dark
             RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .stroke(
                     LinearGradient(
-                        colors: [.white.opacity(0.5), .white.opacity(0.1), .clear],
+                        colors: [.primary.opacity(0.1), .primary.opacity(0.05), .clear],
                         startPoint: .top,
                         endPoint: .bottom
                     ),
