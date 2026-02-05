@@ -208,6 +208,7 @@ struct JotCardView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(ScaleButtonStyle())
+        .keyboardShortcut(.delete, modifiers: .command)
         .accessibilityLabel("删除")
         .confirmationDialog("删除这条笔记？", isPresented: $showDeleteConfirm) {
             Button("删除", role: .destructive) {
