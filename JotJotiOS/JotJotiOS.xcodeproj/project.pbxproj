@@ -17,6 +17,7 @@
 		6EDDE66754C7FE920D5A7E01 /* JotCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A4D92A2FA6E1933E086A5D /* JotCardView.swift */; };
 		7B1F15F05C98275FA9681710 /* LinkPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4626311E851F5A41A8A92AA7 /* LinkPreviewCard.swift */; };
 		A3EC6828E6C3132FE2DD727F /* LinkPreviewFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C678A4B877E4C691D03E7C /* LinkPreviewFetcher.swift */; };
+		A9F0B91B214612142BA353F5 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BE160A5CCDBEA98542949 /* SplashView.swift */; };
 		C81F39E27D6BC2F25B468324 /* Jot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722B6C963845192B23F80352 /* Jot.swift */; };
 		D1C029BB2D13A81F7EC1DDEB /* JotSimilarityAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F431B44201B9127E7F29BC4B /* JotSimilarityAnalyzer.swift */; };
 		E37FBB683FCE9F06F321955F /* JotListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2A3DF1524EEC4C9762719C /* JotListRow.swift */; };
@@ -35,6 +36,7 @@
 		88BB3CA159B6BDD1752FA673 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		89E6EEAC63B2C0EF423F5920 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5435484140AC33709E3E475 /* RichTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextHelper.swift; sourceTree = "<group>"; };
+		DF5BE160A5CCDBEA98542949 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		EC2A3DF1524EEC4C9762719C /* JotListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotListRow.swift; sourceTree = "<group>"; };
 		ED8E9F41052D75E58D57EC70 /* MarkdownTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownTextEditor.swift; sourceTree = "<group>"; };
 		F431B44201B9127E7F29BC4B /* JotSimilarityAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JotSimilarityAnalyzer.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				ED8E9F41052D75E58D57EC70 /* MarkdownTextEditor.swift */,
 				6B0F1D7316164E2B9B0D3701 /* MergeSuggestionCard.swift */,
 				88BB3CA159B6BDD1752FA673 /* SpeechRecognizer.swift */,
+				DF5BE160A5CCDBEA98542949 /* SplashView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				4AFD60B7BCD0D664303C96D3 /* MergeSuggestionCard.swift in Sources */,
 				68B08D7AA5AB975A4389472C /* RichTextHelper.swift in Sources */,
 				540E654F90BCDE24A2670571 /* SpeechRecognizer.swift in Sources */,
+				A9F0B91B214612142BA353F5 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

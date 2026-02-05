@@ -91,6 +91,7 @@ struct ContentView: View {
                         .foregroundColor(.primary)
                         .frame(width: 44, height: 44)
                 }
+                .keyboardShortcut("l", modifiers: .command)
                 .disabled(jots.isEmpty)
                 
                 Spacer()
