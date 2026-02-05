@@ -26,6 +26,9 @@ struct JotEditorView: View {
         .onDrop(of: [.image, .movie, .fileURL], isTargeted: $isDropTargeted, perform: handleDrop)
         .onAppear { isFocused = true; detectLinks() }
         .onChange(of: jot.content) { _, _ in detectLinks() }
+        .onReceive(NotificationCenter.default.publisher(for: .togglePin)) { _ in
+            togglePin()
+        }
     }
     
     // MARK: - 媒体网格

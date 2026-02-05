@@ -34,6 +34,13 @@ struct JotJotMacApp: App {
                 }
                 .keyboardShortcut("n", modifiers: .command)
             }
+            
+            CommandGroup(after: .textEditing) {
+                Button("固定/取消固定") {
+                    NotificationCenter.default.post(name: .togglePin, object: nil)
+                }
+                .keyboardShortcut("p", modifiers: .command)
+            }
         }
         
         MenuBarExtra("JotJot", systemImage: "note.text") {
@@ -54,4 +61,5 @@ struct JotJotMacApp: App {
 extension Notification.Name {
     static let createNewJot = Notification.Name("createNewJot")
     static let selectJot = Notification.Name("selectJot")
+    static let togglePin = Notification.Name("togglePin")
 }
