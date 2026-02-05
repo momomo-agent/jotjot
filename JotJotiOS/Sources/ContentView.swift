@@ -106,6 +106,7 @@ struct ContentView: View {
                         .foregroundColor(.primary)
                         .frame(width: 44, height: 44)
                 }
+                .keyboardShortcut("n", modifiers: .command)
             }
             .padding(.horizontal, 8)
             .padding(.top, 4)
