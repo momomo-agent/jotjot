@@ -3,64 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JotJot - 想到就记，记完就走</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-        .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center; }
-        .logo { font-size: 64px; margin-bottom: 24px; }
-        h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
-        .tagline { font-size: 24px; opacity: 0.9; margin-bottom: 48px; }
-        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
-        .feature { background: rgba(255,255,255,0.1); padding: 24px; border-radius: 16px; }
-        .feature-icon { font-size: 32px; margin-bottom: 12px; }
-        .feature h3 { font-size: 18px; margin-bottom: 8px; }
-        .feature p { font-size: 14px; opacity: 0.8; }
-        .downloads { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
-        .download-btn { display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #333; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
-        .download-btn:hover { transform: translateY(-2px); }
-        .footer { opacity: 0.7; font-size: 14px; }
-        .footer a { color: #fff; }
-        @media (max-width: 600px) { h1 { font-size: 32px; } .features { grid-template-columns: 1fr; } }
-    </style>
+    <title>JotJot - 闪念捕捉器</title>
+    <link rel="icon" type="image/png" href="./icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">📝</div>
-        <h1>JotJot</h1>
-        <p class="tagline">想到就记，记完就走</p>
-        
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>极速启动</h3>
-                <p>打开就能写，不打断思路</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">☁️</div>
-                <h3>iCloud 同步</h3>
-                <p>Mac 和 iPhone 无缝同步</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎤</div>
-                <h3>语音输入</h3>
-                <p>说出来，自动转文字</p>
+    <!-- 背景光效 -->
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+    
+    <!-- 导航 -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <img src="./icon.png" alt="JotJot" class="logo-icon">
+                <span class="logo-text">JotJot</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">功能</a>
+                <a href="#platforms">平台</a>
+                <a href="#download" class="nav-cta">下载</a>
             </div>
         </div>
-        
-        <div class="downloads">
-            <a href="#" class="download-btn">🍎 Mac 版下载</a>
-            <a href="#" class="download-btn">📱 iOS 版下载</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-icon">⚡</span>
+                <span>闪念捕捉器</span>
+            </div>
+            <h1 class="hero-title">
+                想到就记，<br>
+                <span class="gradient-text">记完就走</span>
+            </h1>
+            <p class="hero-subtitle">
+                灵感如闪电般转瞬即逝。JotJot 帮你在 0.5 秒内捕捉每一个闪念，<br>
+                Mac + iOS 双端同步，让创意永不丢失。
+            </p>
+            <div class="hero-actions">
+                <a href="#download" class="btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Mac 版下载
+                </a>
+                <a href="#download" class="btn btn-secondary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                    </svg>
+                    iOS 版下载
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="app-preview">
+                    <div class="preview-window mac-window">
+                        <div class="window-header">
+                            <div class="window-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="window-title">JotJot</span>
+                        </div>
+                        <div class="window-content">
+                            <div class="sidebar">
+                                <div class="sidebar-item active">
+                                    <span class="item-icon">📌</span>
+                                    <span>会议灵感</span>
+                                </div>
+                                <div class="sidebar-item">
+                                    <span class="item-icon">💡</span>
+                                    <span>产品想法</span>
+                                </div>
+                                <div class="sidebar-item">
+                                    <span class="item-icon">✨</span>
+                                    <span>周末计划</span>
+                                </div>
+                            </div>
+                            <div class="editor">
+                                <div class="editor-content">
+                                    <p class="typing-text">下周发布会的开场白...</p>
+                                    <span class="cursor"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer">
-            <p>Made by <a href="https://momomo-agent.github.io/momo-dashboard/">Momo</a> · <a href="https://github.com/momomo-agent/jotjot">GitHub</a></p>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">为什么选择 JotJot？</h2>
+                <p class="section-subtitle">每一个设计决策，都是为了让你更快地捕捉灵感</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>全局快捷键</h3>
+                    <p>⌘⇧J 一键呼出，无论你在做什么，灵感来了就记</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>语音输入</h3>
+                    <p>不方便打字？点击录音，说完自动转文字</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>iCloud 同步</h3>
+                    <p>Mac 上记，iPhone 上看，无缝衔接你的创意流</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>极致动效</h3>
+                    <p>每一次交互都有恰到好处的反馈，用起来就是舒服</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>VSCode 快捷键</h3>
+                    <p>程序员友好，熟悉的快捷键让你效率翻倍</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>隐私优先</h3>
+                    <p>数据只存在你的设备和 iCloud，我们不碰你的笔记</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Platforms -->
+    <section id="platforms" class="platforms">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">双端体验，一样精彩</h2>
+                <p class="section-subtitle">Mac 和 iOS 各有特色，但灵魂一致</p>
+            </div>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">💻</div>
+                    <h3>Mac</h3>
+                    <ul class="platform-features">
+                        <li>⌘⇧J 全局快捷键呼出</li>
+                        <li>VSCode 风格编辑体验</li>
+                        <li>浮动窗口，随叫随到</li>
+                        <li>Esc 一键收起</li>
+                    </ul>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📱</div>
+                    <h3>iOS</h3>
+                    <ul class="platform-features">
+                        <li>打开就写，零等待</li>
+                        <li>滑动切换笔记</li>
+                        <li>语音输入，说完即记</li>
+                        <li>触觉反馈，手感极佳</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download -->
+    <section id="download" class="download">
+        <div class="section-content">
+            <div class="download-card">
+                <div class="download-icon">⚡</div>
+                <h2>开始捕捉你的闪念</h2>
+                <p>免费下载，立即体验</p>
+                <div class="download-buttons">
+                    <a href="#" class="btn btn-primary btn-large">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Mac 版下载
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-large">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                        </svg>
+                        App Store
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="./icon.png" alt="JotJot" class="logo-icon">
+                <span>JotJot</span>
+            </div>
+            <p class="footer-tagline">想到就记，记完就走</p>
+            <p class="footer-copyright">© 2025 JotJot. Made with ⚡ for capturing ideas.</p>
+        </div>
+    </footer>
 </body>
 </html>
