@@ -7,13 +7,19 @@ struct JotJotMacApp: App {
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([Jot.self])
-        let config = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false,
-            cloudKitDatabase: .automatic
-        )
+        // 先尝试正常创建
+        if let container = try? ModelContainer(
+            for: schema,
+            configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)]
+        ) {
+            return container
+        }
+        // 失败则用内存模式兜底
         do {
-            return try ModelContainer(for: schema, configurations: [config])
+            return try ModelContainer(
+                for: schema,
+                configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)]
+            )
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
